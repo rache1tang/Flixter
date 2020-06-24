@@ -12,11 +12,13 @@ public class Movie {
     String posterPath;
     String title;
     String overview;
+    String backdropPath;
 
     public Movie(JSONObject jsonObject) throws JSONException { // constructor(type)
         posterPath = jsonObject.getString("poster_path");
         title = jsonObject.getString("title");
         overview = jsonObject.getString("overview");
+        backdropPath = jsonObject.getString("backdrop_path");
     }
 
     public static List<Movie> fromJsonArray(JSONArray movieJsonArray) throws JSONException { // method(function)
@@ -34,6 +36,10 @@ public class Movie {
          * then append the relative url
          */
         return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath); // size hardcoded to be w342
+    }
+
+    public String getBackdropPath() {
+        return String.format("https://image.tmdb.org/t/p/w342/%s", backdropPath);
     }
 
     public String getTitle() {
