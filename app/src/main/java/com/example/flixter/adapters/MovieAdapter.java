@@ -1,6 +1,7 @@
 package com.example.flixter.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,10 +14,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
+import com.example.flixter.MovieDetailsActivity;
 import com.example.flixter.R;
 import com.example.flixter.models.Movie;
 
+import org.parceler.Parcels;
+
 import java.util.List;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
 
@@ -57,7 +64,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return movies.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvTitle;
         TextView tvOverview;
@@ -68,6 +75,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Movie movie) {
@@ -82,8 +90,31 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 imageURL = movie.getPosterPath();
             }
 
-            Glide.with(context).load(imageURL).into(ivPoster);
+            int radius = 20;
+            int margin = 10;
 
+            Glide.with(context).load(imageURL).transform(new RoundedCornersTransformation(radius, margin)).override(Target.SIZE_ORIGINAL).into(ivPoster);
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            // get position
+            int position = getAdapterPosition();
+
+            if (position != RecyclerView.NO_POSITION) { // make sure position is valid
+                // extract movie from list
+                Movie movie = movies.get(position);
+
+                // create new intent
+                Intent intent = new Intent(context, MovieDetailsActivity.class);
+
+                // pass movie as an extra serialized via Parcels.wrap()
+                intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
+
+                // show activity
+                context.startActivity(intent);
+            }
         }
     }
 }
