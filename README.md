@@ -2,7 +2,7 @@
 
 **Name of your app** shows the latest movies currently playing in theaters. The app utilizes the Movie Database API to display images and basic information about these movies to the user.
 
-Time spent: **10** hours spent in total
+Time spent: **15** hours spent in total
 
 ## User Stories
 
@@ -20,7 +20,7 @@ The following **stretch** features are implemented:
 * [x] Improved the user interface by experimenting with styling and coloring.
 * [x] Apply rounded corners for the poster or background images using [Glide transformations](https://guides.codepath.org/android/Displaying-Images-with-the-Glide-Library#transformations)
 * [ ] Apply the popular [View Binding annotation library](http://guides.codepath.org/android/Reducing-View-Boilerplate-with-ViewBinding) to reduce boilerplate code.
-* [ ] Allow video trailers to be played in full-screen using the YouTubePlayerView from the details screen.
+* [x] Allow video trailers to be played in full-screen using the YouTubePlayerView from the details screen.
 
 The following **additional** features are implemented:
 
@@ -32,6 +32,7 @@ Here's a walkthrough of implemented user stories:
 
 [App Demo Link (Vertical)] https://github.com/rache1tang/Flixter/blob/master/Kapture%202020-06-26%20at%209.47.22.gif 
 [App Demo Link (Horizontal)] https://github.com/rache1tang/Flixter/blob/master/Kapture%202020-06-26%20at%209.48.52.gif 
+[App Demo Link (Video Function Implemented later)] https://github.com/rache1tang/Flixter/blob/master/Kapture%202020-06-26%20at%2015.12.09.gif
 GIF created with [Kap](http://www.getkap.co).
 
 ## Notes
