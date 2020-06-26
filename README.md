@@ -30,9 +30,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+[App Demo Link (Vertical)] https://github.com/rache1tang/Flixter/blob/master/Kapture%202020-06-26%20at%209.47.22.gif
+[App Demo Link (Horizontal)] https://github.com/rache1tang/Flixter/blob/master/Kapture%202020-06-26%20at%209.48.52.gif
+GIF created with [Kap](http://www.getkap.co).
 
 ## Notes
 
