@@ -32,7 +32,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     public MovieAdapter(Context context, List<Movie> movies) { // constructor for MovieAdapter
         this.context = context;
-        this. movies = movies;
+        this.movies = movies;
     }
 
 
@@ -81,6 +81,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         public void bind(Movie movie) {
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
+            tvOverview.setTextColor(0xFFFFFFFF);
+            tvTitle.setTextColor(0xFFFFFFFF);
 
             String imageURL;
 

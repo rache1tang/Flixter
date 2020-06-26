@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutDetails"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#303030"
@@ -13,9 +14,9 @@
         android:layout_width="411dp"
         android:layout_height="48dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="#FFFFFFFF"
         tools:text="title" />
 
     <RatingBar
@@ -33,10 +34,9 @@
         android:id="@+id/tvOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:textColor="#FFFFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rbVoteAverage"
+        app:layout_constraintTop_toBottomOf="@+id/ivBackdrop"
         tools:text="overview" />
 
     <TextView
@@ -48,4 +48,13 @@
         app:layout_constraintStart_toEndOf="@+id/rbVoteAverage"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"
         tools:text="3/5 on __ views" />
+
+    <ImageView
+        android:id="@+id/ivBackdrop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rbVoteAverage"
+        tools:srcCompat="@tools:sample/avatars" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

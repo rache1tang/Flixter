@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         // create new instance of http client
         AsyncHttpClient client = new AsyncHttpClient();
+
         client.get(NOW_PLAYING_URL, new JsonHttpResponseHandler() { // use json because that is the language the api uses
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) { // responses are json objects!
