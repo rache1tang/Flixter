@@ -13,11 +13,17 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.flixter.models.Movie;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+import okhttp3.Headers;
 
 public class MovieDetailsActivity extends AppCompatActivity {
 
@@ -31,6 +37,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     TextView tvVotes;
     ImageView ivBackdrop;
     String movieID;
+    Integer id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         // unwrap movie and assign field
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
+        id = movie.getId();
 
         // set title and overview
         tvTitle.setText(movie.getTitle());
@@ -69,15 +78,43 @@ public class MovieDetailsActivity extends AppCompatActivity {
         ivBackdrop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                movieID = movie.getMovieId();
-                // use intent to go to new activity if a video for it exists
-                if (!movieID.equals("")) {
-                    Intent intent = new Intent(MovieDetailsActivity.this, MovieTrailerActivity.class);
-                    intent.putExtra(MOVIE_ID, movieID);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "No Trailer Available", Toast.LENGTH_SHORT).show();
-                }
+                String MOVIE_URL = "https://api.themoviedb.org/3/movie/" + id.toString() + "/videos?api_key=7f3946a3c8e821d8c229525297c5adff";
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.get(MOVIE_URL, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Headers headers, JSON json) {
+                        Log.d("MovieDetailsActivity", "onSuccess");
+                        JSONObject jsonObject = json.jsonObject;
+
+                        try {
+                            JSONArray results = jsonObject.getJSONArray("results");
+
+                            if (results.length() > 0) {
+                                JSONObject firstVideo = results.getJSONObject(0);
+                                movieID = firstVideo.getString("key");
+                            }
+                            else { movieID = "";}
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        // use intent to go to new activity if a video for it exists
+                        if (!movieID.equals("")) {
+                            Intent intent = new Intent(MovieDetailsActivity.this, MovieTrailerActivity.class);
+                            intent.putExtra(MOVIE_ID, movieID);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No Trailer Available", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                        Log.d("MovieDetailsActivity", "onFailure");
+                    }
+                });
+
+
 
             }
         });

@@ -76,38 +76,5 @@ public class Movie {
         return voteCount;
     }
 
-
-    public String getMovieId() {
-        String MOVIE_URL = "https://api.themoviedb.org/3/movie/" + id.toString() + "/videos?api_key=7f3946a3c8e821d8c229525297c5adff";
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(MOVIE_URL, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.d("Movie", "onSuccess");
-                JSONObject jsonObject = json.jsonObject;
-
-                try {
-                    JSONArray results = jsonObject.getJSONArray("results");
-
-                    // use first key IF IT EXISTS
-                    if (results.length() > 0) {
-                        JSONObject firstVideo = results.getJSONObject(0);
-                        key = firstVideo.getString("key");
-                    } else { key = "";}
-
-
-                } catch (JSONException e) {
-                    Log.e("Movie", "Json hit exception", e);
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.d("Movie", "onFailure");
-            }
-
-        });
-        return key;
-    }
+    public Integer getId() { return id; }
 }
